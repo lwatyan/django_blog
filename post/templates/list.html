@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+	List
+
+{% endblock header %}
+
+{% block content %}
+
+ {% for wow in posts %}
+
+  <div class="col-sm-6 col-md-4">
+		<div class="card">
+		  <div class="card-body">
+		  	{% if wow.photo %}
+		  		<img class= "card-img-top" src="{{wow.photo.url}}" alt="Post image">
+		  	{% endif %}
+
+		    <h5 class="card-title">{{wow.title}}</h5>
+		    <p class="card-text">content: {{wow.content}}</p>
+		    <a href="{% url 'detail' post_id=wow.id %}" class="btn btn-outline-dark">Info</a>
+</div>
+</div>
+</div>
+
+
+ {{wow.title}}</h1></a>
+
+
+{% endfor %}
+{% endblock content %}
+
+

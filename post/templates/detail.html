@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+	Detail
+	 
+{% endblock header %}
+
+{% block content %}
+
+<img class= "card-img-top" src="{{title.photo.url}}" alt="Post image">
+	{{title.title}}
+
+	{{title.content}}
+
+	{{title.created}}
+	
+	{{title.updated}}
+
+
+{% endblock content %}
