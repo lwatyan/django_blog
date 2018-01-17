@@ -2,33 +2,55 @@
 
 {% block header %}
 
-	List
+    List
 
 {% endblock header %}
 
 {% block content %}
 
+
+<form action="{% url 'list' %}" method="GET" classs= "form-control">
+    <input type="text" name="q" placeholder="Search for Posts.." class = "form-control" value = "{{request.GET.q}}">
+    <input type="submit" value="Search" class="btn btn-outline-info">
+
+</form>
+
+
+
+<div class="row">
  {% for wow in posts %}
 
   <div class="col-sm-6 col-md-4">
-		<div class="card">
-		  <div class="card-body">
-		  	{% if wow.photo %}
-		  		<img class= "card-img-top" src="{{wow.photo.url}}" alt="Post image">
-		  	{% endif %}
+        <div class="card border-dark mb-3"">
+          <div class="card-body text-dark">
+            {% if wow.photo %}
+                <img class= "card-img-top" src="{{wow.photo.url}}" alt="Post image">
+            {% endif %}
 
-		    <h5 class="card-title">{{wow.title}}</h5>
-		    <p class="card-text">content: {{wow.content}}</p>
-		    <a href="{% url 'detail' post_id=wow.id %}" class="btn btn-outline-dark">Info</a>
-</div>
-</div>
-</div>
+            <h5 class="card-title">{{wow.title}}</h5>
+            <p class="card-text"> {{wow.created}} <br> {{wow.updated}}</p>
+            <p class="card-text"> Author: {{wow.author}}</p>
+
+            <a href="{% url 'detail' post_id=wow.id %}" class="btn btn-outline-info">Info</a>
+           
+
+            {% if request.user.is_staff or request.user.is_superuser %}
+
+                <a href="{% url 'update' post_id=wow.id %}" class="btn btn-outline-primary">update</a>
+                <a href="{% url 'delete' post_id=wow.id %}" class="btn btn-outline-danger">delete</a>
+
+            {% endif %}
 
 
- {{wow.title}}</h1></a>
-
+         </div>
+        </div>
+  </div>
 
 {% endfor %}
+
+</div>
+
+
 {% endblock content %}
 
 

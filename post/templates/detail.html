@@ -7,15 +7,67 @@
 {% endblock header %}
 
 {% block content %}
+<div class= "row ">
+	<div class="col-sm-8 offset-sm-2">
+		<div class="card text-white bg-dark">
+		  <img class="card-img-top" src="{{post.photo.url}}" alt="Card image cap">
+		  <div class="card-body">
+		    <h5 class="card-title">{{post.title}}</h5>
+		    <p class="card-text">{{post.content}}</p>
+		    <button class="btn btn-secondary" onclick="like_button()">
+		    	<div id= "like-count">{{count}}</div>
+		    	<i id= "like-heart" class="fa fa-heart {% if liked %} text-danger {% endif %}" aria-hidden="true"> </i>
+		    </button>
+		  </div>
+		</div>
+	</div>
+</div>
 
-<img class= "card-img-top" src="{{title.photo.url}}" alt="Post image">
-	{{title.title}}
+<!--- This is the comment section -->
 
-	{{title.content}}
 
-	{{title.created}}
-	
-	{{title.updated}}
 
+    
+  <p class="card-text">
+        {% for comment in comments %}
+            <div class = "alert alert-primary"> {{comment.user}}: {{comment.remark}}</div>
+        {% endfor %}
+    </p>
+    <p class="card-text">
+        <form accept="{% url 'detail' post_id=post.id %}" method="POST">
+            {%csrf_token %}
+            {{form}}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+</p>
+    
+
+
+<!--- This is the like button -->
+<script>
+	function like_button(){
+		$.ajax({
+			type:"GET",
+			url:"{% url 'likes' post_id=post.id %}",
+			error: function(){
+				alert("Oops Something Went Worng :( ")
+
+			},
+			success: function(data){
+				$("#like-count").text(data.count);
+				if(data.action==="like"){
+					$("#like-heart").addClass("text-danger");
+				}
+				else
+				{
+					$("#like-heart").removeClass("text-danger");
+
+				}
+
+			},
+
+		});
+	}
+</script>
 
 {% endblock content %}
