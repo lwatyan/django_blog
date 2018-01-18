@@ -91,7 +91,7 @@ else:
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django',
         'USER': 'django',
-        'PASSWORD': '7d3277a2ce6c39d30a0f03bdea',
+        'PASSWORD': '041737f4f2f6772f4f7831d048ff268d',
         'HOST': 'localhost',
         'POST': '',
     }
