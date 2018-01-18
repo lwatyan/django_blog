@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+	Detail
+	 
+{% endblock header %}
+
+{% block content %}
+
+<div class="card bg-light mb-3">
+		  <div class="card-body">
+		    <h5 class="card-title">Address: {{response.result.formatted_address}}</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">Phone number: {{response.result.international_phone_number}}</h6>
+		    <p class="card-text">Lat: {{response.result.geometry.location.lat}}</p>
+		    <p class="card-text">Lng: {{response.result.geometry.location.lng}}</p>
+</div>
+</div>
+
+
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBepeUbBoAIOubNN3SigAT1e7MrlnD7xuc
+    &q={{response.result.geometry.location.lat}},{{response.result.geometry.location.lng}}" allowfullscreen>
+</iframe>
+
+
+		
+
+{% endblock content %}
